@@ -1,0 +1,17 @@
+<!ELEMENT PhotographyCommunity (Photographers)>
+<!ELEMENT Photographers (Photographer+)>
+<!ELEMENT Photographer (Name, Portfolio, Gallery)>
+<!ELEMENT Portfolio (Photo+)>
+<!ELEMENT Gallery (Name, Location)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Photo (#PCDATA)>
+<!ELEMENT Location (#PCDATA)>
+
+<!ENTITY photographer1 "John Doe">
+<!ENTITY photographer2 "Jane Smith">
+<!ENTITY photo1 "Sunset in the Mountains">
+<!ENTITY photo2 "Urban Jungle">
+<!ENTITY gallery1 "Mountain View Gallery">
+<!ENTITY gallery2 "City Lights Gallery">
+<!ENTITY location1 "45.4215, -75.6919">
+<!ENTITY location2 "40.7128, -74.0060">

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photography Community</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+        #map {
+            height: 400px;
+            width: 800px;
+            border: 1px solid black;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <h1>Photography Community</h1>
+    <table>
+        <tr>
+            <th>Photographer</th>
+            <th>Portfolio</th>
+            <th>Gallery</th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>Sunset in the Mountains, Urban Jungle</td>
+            <td>Mountain View Gallery, 45.4215, -75.6919</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>Urban Jungle, Sunset in the Mountains</td>
+            <td>City Lights Gallery, 40.7128, -74.0060</td>
+        </tr>
+    </table>
+    <div id="map"></div>
+    <input id="start" type="text" placeholder="Enter starting location">
+    <input id="end" type="text" placeholder="Enter ending location">
+    <button onclick="getRoute()">Get Route</button>
+    <button onclick="getLocation()">Get My Location</button>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script>
+        let map;
+        let routingControl;
+        let myLocationMarker;
+        let currentLocation;
+        let endLocationMarker;
+
+        function initMap() {
+            map = L.map('map').setView([40.7128, -74.0060], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+                subdomains: ['a', 'b', 'c']
+            }).addTo(map);
+        }
+
+        function getRoute() {
+            const end = document.getElementById("end").value;
+            const waypoints = [
+                currentLocation,
+                L.latLng(parseFloat(end.split(',')[0]), parseFloat(end.split(',')[1]))
+            ];
+            routingControl.setWaypoints(waypoints);
+
+            if (endLocationMarker) {
+                map.removeLayer(endLocationMarker);
+            }
+
+            endLocationMarker = L.marker(waypoints[1]).addTo(map);
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            currentLocation = L.latLng(lat, lon);
+
+            if (myLocationMarker) {
+                map.removeLayer(myLocationMarker);
+            }
+
+            myLocationMarker = L.marker(currentLocation).addTo(map);
+            map.setView(currentLocation, 15);
+
+            document.getElementById("start").value = `${lat}, ${lon}`;
+
+            initRoutingControl(); // Initialize routing control here
+            getRoute(); // Call getRoute() here
+        }
+
+        function initRoutingControl() {
+            routingControl = L.Routing.control({
+                waypoints: [
+                    currentLocation,
+                    L.latLng(45.4215, -75.6919)
+                ],
+                routeWhileDragging: true
+            }).addTo(map);
+        }
+
+        initMap(); // Call initMap when the page loads
+    </script>
+</body>
+</html>

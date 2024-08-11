@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PhotographyCommunity SYSTEM "photography.dtd">
+
+<PhotographyCommunity>
+
+    <Photographers>
+        <Photographer>
+            <Name>&photographer1;</Name>
+            <Portfolio>
+                <Photo>&photo1;</Photo>
+                <Photo>&photo2;</Photo>
+            </Portfolio>
+            <Gallery>
+                <Name>&gallery1;</Name>
+                <Location>&location1;</Location>
+            </Gallery>
+        </Photographer>
+        
+        <Photographer>
+            <Name>&photographer2;</Name>
+            <Portfolio>
+                <Photo>&photo2;</Photo>
+                <Photo>&photo1;</Photo>
+            </Portfolio>
+            <Gallery>
+                <Name>&gallery2;</Name>
+                <Location>&location2;</Location>
+            </Gallery>
+        </Photographer>
+    </Photographers>
+
+</PhotographyCommunity>

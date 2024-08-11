@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <!-- Define the PhotographyCommunity element -->
+    <xs:element name="PhotographyCommunity">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Photographers" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Define the Photographers element -->
+    <xs:element name="Photographers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Photographer" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Define the Photographer element -->
+    <xs:element name="Photographer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Portfolio" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="Gallery" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Define the Portfolio element -->
+    <xs:element name="Portfolio">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Photo" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Define the Gallery element -->
+    <xs:element name="Gallery">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Location" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
